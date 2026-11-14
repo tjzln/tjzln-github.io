@@ -17,7 +17,17 @@
     <a class="brand" href="#" aria-label="tjzln 홈">tjzln<span class="brand-dot">.</span></a>
     <nav aria-label="주 메뉴"><a class="nav-home" href="#">기록 모음</a><a href="https://github.com/tjzln" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></nav>
   </header>
-  <main id="main" class="wrap" tabindex="-1">
+  <div class="page-layout wrap">
+    <aside class="profile" aria-labelledby="profile-name">
+      <div class="profile-avatar" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="18" r="8"/><path d="M9 41c0-9 6-14 15-14s15 5 15 14"/></svg></div>
+      <span class="eyebrow">ABOUT ME</span>
+      <h2 id="profile-name">정서진</h2>
+      <p class="profile-handle">@tjzln</p>
+      <div class="profile-affiliation"><span class="profile-label">EDUCATION</span><p>충남대학교<br><span>전파정보통신공학과</span></p></div>
+      <div class="profile-experience"><span class="profile-label">EXPERIENCE</span><ul><li><strong>Whitehat School</strong><span>4기</span></li><li><strong>Knights Frontier</strong><span>3기</span></li></ul></div>
+      <a class="profile-github" href="https://github.com/tjzln" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </aside>
+  <main id="main" class="main-content" tabindex="-1">
     <div id="home-view">
       <section class="hero" aria-labelledby="hero-title">
         <div class="eyebrow"><span class="status-dot"></span> PERSONAL KNOWLEDGE ARCHIVE</div>
@@ -34,6 +44,7 @@
     <section id="category-view" class="detail-view" hidden aria-labelledby="category-title"><a class="back-link" href="#">← 전체 기록으로</a><div class="detail-heading"><span class="eyebrow" id="category-label"></span><h1 id="category-title"></h1><p id="category-description"></p></div><div class="list-heading"><h2>기록 목록</h2><span class="section-count" id="category-count"></span></div><div id="category-posts"></div></section>
     <article id="post-view" class="detail-view" hidden aria-labelledby="post-title"><a class="back-link" id="post-back" href="#">← 목록으로</a><header class="detail-heading"><span class="eyebrow" id="post-meta"></span><h1 id="post-title"></h1><p id="post-summary"></p></header><div class="post-body" id="post-body"></div><a class="text-link" id="post-source" hidden target="_blank" rel="noopener noreferrer">원문 읽기 ↗</a></article>
   </main>
+  </div>
   <footer class="footer wrap"><a class="brand" href="#">tjzln<span class="brand-dot">.</span></a><p>작은 발견도, 하나의 기록으로.</p><span>© <span id="year"></span> tjzln</span></footer>
 </body>
 </html>
