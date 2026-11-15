@@ -31,7 +31,7 @@
   const categoryURL = id => '#category/' + encodeURIComponent(id);
   // Render the supported Markdown subset using DOM nodes; raw HTML stays text.
   function inline(node, text) {
-    const tokens = /\*\*([^*]+)\*\*|https?:\/\/[^\s<>]+/g;
+    const tokens = /\*\*([^*]+)\*\*|\*([^*\n]+)\*|https?:\/\/[^\s<>]+/g;
     let end = 0;
     for (const match of text.matchAll(tokens)) {
       node.append(document.createTextNode(text.slice(end, match.index)));
@@ -39,6 +39,10 @@
         const strong = el('strong');
         inline(strong, match[1]);
         node.append(strong);
+      } else if (match[2]) {
+        const emphasis = el('em');
+        inline(emphasis, match[2]);
+        node.append(emphasis);
       } else {
         const link = el('a','',match[0]);
         link.href = match[0];
@@ -65,15 +69,16 @@
         wrap.setAttribute('role','region');
         wrap.setAttribute('aria-label','본문 표');
         const table = el('table');
+        const alignments = cells(lines[i+1]).map(s => s.startsWith(':') && s.endsWith(':') ? 'center' : s.endsWith(':') ? 'right' : 'left');
         const head = el('thead');
         const row = el('tr');
-        cells(line).forEach(text => { const cell = el('th'); cell.scope = 'col'; inline(cell,text); row.append(cell); });
+        cells(line).forEach((text,index) => { const cell = el('th'); cell.scope = 'col'; cell.style.textAlign = alignments[index]; inline(cell,text); row.append(cell); });
         head.append(row);
         const body = el('tbody');
         i += 2;
         while (i < lines.length && /^\s*\|/.test(lines[i])) {
           const tr = el('tr');
-          cells(lines[i++]).forEach(text => { const td = el('td'); inline(td,text); tr.append(td); });
+          cells(lines[i++]).forEach((text,index) => { const td = el('td'); td.style.textAlign = alignments[index]; inline(td,text); tr.append(td); });
           body.append(tr);
         }
         table.append(head,body); wrap.append(table); target.append(wrap); continue;
