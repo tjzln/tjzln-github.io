@@ -3,7 +3,7 @@
 사이트: https://tjzln.github.io/tjzln-github.io/
 
 별도 설치나 빌드 없이 GitHub Pages에서 동작하는 정적 홈페이지입니다.
-실제 글이나 활동 이력이 아직 제공되지 않아 처음에는 빈 목록으로 표시합니다.
+홈에는 최근 글이, 각 카테고리에는 해당 카테고리의 글이 표시됩니다.
 
 ## GitHub Pages 설정
 
@@ -32,7 +32,11 @@ window.ARCHIVE_POSTS = [
 ```
 
 `id`는 글마다 달라야 합니다. 날짜는 `YYYY-MM-DD` 형식입니다.
-`body`는 일반 텍스트이며 Markdown과 HTML을 해석하지 않습니다.
+`body`는 기본적으로 일반 텍스트입니다. `format: 'markdown'`을 추가하면
+제목, 문단, 굵은 글씨, HTTP(S) 주소, 목록, 구분선, 표를 표시할 수 있습니다.
+HTML은 실행하지 않고 텍스트로 표시합니다. 코드 블록과 이미지 문법은 아직 지원하지 않습니다.
+ASK 2026 글의 원문은 `articles/ask-2026-source-code-representation.md`에 보관하며,
+사이트에서 표시하는 내용은 `posts.js`의 해당 글 `body`입니다. 수정 시 두 파일을 함께 갱신하세요.
 외부 블로그 글은 `summary`와 `url`로 연결할 수도 있습니다.
 글은 최신 날짜순으로 정렬되며 홈에는 최근 5개가 표시됩니다.
 문자열에 따옴표나 백틱을 포함할 때는 JavaScript 문법에 맞게 이스케이프하세요.

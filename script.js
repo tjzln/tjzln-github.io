@@ -29,6 +29,80 @@
   };
   const count = id => posts.filter(p => p.category === id).length;
   const categoryURL = id => '#category/' + encodeURIComponent(id);
+  // Render the supported Markdown subset using DOM nodes; raw HTML stays text.
+  function inline(node, text) {
+    const tokens = /\*\*([^*]+)\*\*|https?:\/\/[^\s<>]+/g;
+    let end = 0;
+    for (const match of text.matchAll(tokens)) {
+      node.append(document.createTextNode(text.slice(end, match.index)));
+      if (match[1]) {
+        const strong = el('strong');
+        inline(strong, match[1]);
+        node.append(strong);
+      } else {
+        const link = el('a','',match[0]);
+        link.href = match[0];
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        node.append(link);
+      }
+      end = match.index + match[0].length;
+    }
+    node.append(document.createTextNode(text.slice(end)));
+  }
+  function markdown(target, source) {
+    target.replaceChildren();
+    const lines = source.replace(/\r\n?/g,'\n').split('\n');
+    const cells = line => line.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(s => s.trim());
+    const divider = line => line && /^\s*\|/.test(line) && cells(line).every(s => /^:?-{3,}:?$/.test(s));
+    const block = line => /^\s*(?:#{1,6}\s|[-*]\s|\d+\.\s|---+\s*$|\|)/.test(line);
+    for (let i = 0; i < lines.length;) {
+      const line = lines[i].trim();
+      if (!line) { i++; continue; }
+      if (/^\|/.test(line) && divider(lines[i+1])) {
+        const wrap = el('div','table-scroll');
+        wrap.tabIndex = 0;
+        wrap.setAttribute('role','region');
+        wrap.setAttribute('aria-label','본문 표');
+        const table = el('table');
+        const head = el('thead');
+        const row = el('tr');
+        cells(line).forEach(text => { const cell = el('th'); cell.scope = 'col'; inline(cell,text); row.append(cell); });
+        head.append(row);
+        const body = el('tbody');
+        i += 2;
+        while (i < lines.length && /^\s*\|/.test(lines[i])) {
+          const tr = el('tr');
+          cells(lines[i++]).forEach(text => { const td = el('td'); inline(td,text); tr.append(td); });
+          body.append(tr);
+        }
+        table.append(head,body); wrap.append(table); target.append(wrap); continue;
+      }
+      const heading = line.match(/^(#{1,6})\s+(.+)$/);
+      if (heading) {
+        // The article title already owns h1; keep body headings subordinate.
+        const node = el('h' + Math.max(2,heading[1].length));
+        inline(node,heading[2]); target.append(node); i++; continue;
+      }
+      if (/^---+$/.test(line)) { target.append(el('hr')); i++; continue; }
+      const item = line.match(/^([-*]|\d+\.)\s+(.+)$/);
+      if (item) {
+        const ordered = /^\d/.test(item[1]);
+        const list = el(ordered ? 'ol' : 'ul');
+        if (ordered) list.start = parseInt(item[1],10);
+        while (i < lines.length) {
+          const next = lines[i].trim().match(/^([-*]|\d+\.)\s+(.+)$/);
+          if (!next || /^\d/.test(next[1]) !== ordered) break;
+          const li = el('li'); inline(li,next[2]); list.append(li); i++;
+        }
+        target.append(list); continue;
+      }
+      let text = line;
+      i++;
+      while (i < lines.length && lines[i].trim() && !block(lines[i])) text += '\n' + lines[i++].trim();
+      const paragraph = el('p'); inline(paragraph,text); target.append(paragraph);
+    }
+  }
   function renderList(target, items) {
     target.replaceChildren();
     if (!items.length) {
@@ -92,7 +166,9 @@
       $('post-meta').textContent = c.name + (post.date ? ' · ' + post.date : '');
       $('post-title').textContent = post.title;
       $('post-summary').textContent = post.summary || '';
-      $('post-body').textContent = post.body || '';
+      $('post-body').classList.toggle('markdown-body',post.format === 'markdown');
+      if (post.format === 'markdown') markdown($('post-body'),post.body || '');
+      else $('post-body').textContent = post.body || '';
       $('post-source').hidden = true;
       try {
         const url = new URL(post.url);
