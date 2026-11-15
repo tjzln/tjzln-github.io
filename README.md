@@ -3,7 +3,7 @@
 사이트: https://tjzln.github.io/tjzln-github.io/
 
 별도 설치나 빌드 없이 GitHub Pages에서 동작하는 정적 홈페이지입니다.
-홈에는 최근 글이, 각 카테고리에는 해당 카테고리의 글이 표시됩니다.
+홈에는 카테고리가, 각 카테고리에는 해당 카테고리의 글이 표시됩니다.
 
 ## GitHub Pages 설정
 
@@ -38,7 +38,7 @@ HTML은 실행하지 않고 텍스트로 표시합니다. 코드 블록과 이�
 ASK 2026 글의 원문은 `articles/ask-2026-source-code-representation.md`에 보관하며,
 사이트에서 표시하는 내용은 `posts.js`의 해당 글 `body`입니다. 수정 시 두 파일을 함께 갱신하세요.
 외부 블로그 글은 `summary`와 `url`로 연결할 수도 있습니다.
-글은 최신 날짜순으로 정렬되며 홈에는 최근 5개가 표시됩니다.
+각 카테고리의 글은 최신 날짜순으로 정렬됩니다.
 게시글이나 표시 코드를 변경하면 `index.html`의 `posts.js`, `script.js`, `style.css` 주소에 붙은
 `v=` 값도 새 버전으로 변경하세요. 브라우저에 이전 파일이 남아 글이 누락되는 것을 방지합니다.
 문자열에 따옴표나 백틱을 포함할 때는 JavaScript 문법에 맞게 이스케이프하세요.
@@ -51,6 +51,7 @@ ASK 2026 글의 원문은 `articles/ask-2026-source-code-representation.md`에 �
 | 블로그/기술문서 | `technical-writing` |
 | 논문/컨퍼런스 | `research` |
 | 공모전/자격증 | `achievements` |
+| 진행상황 | `progress` |
 
 ## 디자인 수정 및 미리보기
 

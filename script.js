@@ -6,7 +6,8 @@
     '<path d="M8 10h8v6a4 4 0 0 1-8 0Zm1 0V8a3 3 0 0 1 6 0v2M5 12h3m8 0h3M5 17h3m8 0h3M12 10v10M7 4l2 2m8-2-2 2"/>',
     '<path d="M5 3h10l4 4v14H5Zm10 0v5h4M8 12h8m-8 4h6"/>',
     '<path d="M3 5c4-2 6-1 9 1 3-2 5-3 9-1v14c-4-2-6-1-9 1-3-2-5-3-9-1Zm9 1v14"/>',
-    '<path d="M8 3h8v6a4 4 0 0 1-8 0Zm0 2H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 1v5m-4 3h8m-6-3h4v3"/>'
+    '<path d="M8 3h8v6a4 4 0 0 1-8 0Zm0 2H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 1v5m-4 3h8m-6-3h4v3"/>',
+    '<path d="M5 3v18h15M8 16l4-5 4 2 5-7m-5 0h5v5"/>'
   ];
   const categories = [
     {id:'development',name:'개발',label:'DEVELOPMENT',description:'아이디어를 코드로 옮기는 과정. 프로젝트와 개발 경험을 기록합니다.'},
@@ -14,7 +15,8 @@
     {id:'bug-bounty',name:'Bug Bounty',label:'BUG BOUNTY',description:'취약점을 찾고 원인을 이해하는 과정. 공개 가능한 분석과 인사이트를 남깁니다.'},
     {id:'technical-writing',name:'블로그/기술문서',label:'TECHNICAL WRITING',description:'이해한 것을 나만의 언어로. 학습 노트와 기술 문서를 모읍니다.'},
     {id:'research',name:'논문/컨퍼런스',label:'PAPERS & CONFERENCES',description:'연구에서 발견하는 새로운 관점. 논문 리뷰와 컨퍼런스의 배움을 기록합니다.'},
-    {id:'achievements',name:'공모전/자격증',label:'CHALLENGES & CERTIFICATIONS',description:'목표를 세우고 도전하는 여정. 공모전 경험과 자격증 학습을 정리합니다.'}
+    {id:'achievements',name:'공모전/자격증',label:'CHALLENGES & CERTIFICATIONS',description:'목표를 세우고 도전하는 여정. 공모전 경험과 자격증 학습을 정리합니다.'},
+    {id:'progress',name:'진행상황',label:'WORK IN PROGRESS',description:'지금까지의 경험을 돌아보고, 앞으로의 공부와 도전을 기록합니다.'}
   ];
   const $ = id => document.getElementById(id);
   const validCategory = id => categories.find(c => c.id === id);
@@ -145,9 +147,7 @@
     card.append(top,el('h3','',c.name),el('p','',c.description),bottom);
     $('category-grid').append(card);
   });
-  $('total-count').textContent = '전체 ' + posts.length + '개의 기록';
   $('year').textContent = new Date().getFullYear();
-  renderList($('recent-posts'),posts.slice(0,5));
   function route(focus) {
     let hash;
     try { hash = decodeURIComponent(location.hash.slice(1)); } catch { hash = ''; }

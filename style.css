@@ -49,3 +49,7 @@
 .markdown-body th:first-child,.markdown-body td:first-child{min-width:150px}
 .markdown-body tr:last-child td{border-bottom:0}
 @media(max-width:760px){.post-body.markdown-body{font-size:14px}.markdown-body h2{font-size:22px}.markdown-body h3{font-size:18px}.markdown-body th,.markdown-body td{padding:10px 12px}.detail-heading h1{overflow-wrap:anywhere}}
+
+/* Leave breathing room above the footer without the former recent-post section. */
+#home-view{padding-bottom:64px}
+@media(max-width:760px){#home-view{padding-bottom:40px}}
