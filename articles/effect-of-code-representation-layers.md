@@ -3,6 +3,7 @@
 **논문 정보**
 
 - **논문명:** Effect of Code Representation Layers on LLM-Based Security Weakness Detection
+- **학술대회:** WISA 2026 (The 27th World Conference on Information Security Applications)
 - **저자:** Seojin Jeong, Hyunji Cho, Jinsoo Jang
 - **소속:** Chungnam National University
 - **연구 분야:** LLM, Software Vulnerability Detection, CWE, LLVM IR, Assembly Language

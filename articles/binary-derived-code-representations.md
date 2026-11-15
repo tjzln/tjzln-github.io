@@ -4,6 +4,7 @@
 
 - **논문명:** 바이너리 유래 코드 표현이 LLM 기반 CWE 탐지 성능에 미치는 영향 분석
 - **영문명:** Analysis of the Impact of Binary-Derived Code Representations on LLM-Based CWE Detection Performance
+- **학술대회:** 2026 한국정보보호학회 동계학술대회 (CISC-W'26)
 - **저자:** 정서진, 김동엽, 장진수
 - **소속:** 충남대학교
 - **발표 형태:** 학술대회 구두발표
