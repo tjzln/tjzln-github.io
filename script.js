@@ -31,7 +31,7 @@
   const categoryURL = id => '#category/' + encodeURIComponent(id);
   // Render the supported Markdown subset using DOM nodes; raw HTML stays text.
   function inline(node, text) {
-    const tokens = /\*\*([^*]+)\*\*|\*([^*\n]+)\*|https?:\/\/[^\s<>]+/g;
+    const tokens = /\*\*([^*]+)\*\*|\*([^*\n]+)\*|`([^`\n]+)`|https?:\/\/[^\s<>]+/g;
     let end = 0;
     for (const match of text.matchAll(tokens)) {
       node.append(document.createTextNode(text.slice(end, match.index)));
@@ -43,6 +43,8 @@
         const emphasis = el('em');
         inline(emphasis, match[2]);
         node.append(emphasis);
+      } else if (match[3]) {
+        node.append(el('code','',match[3]));
       } else {
         const link = el('a','',match[0]);
         link.href = match[0];

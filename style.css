@@ -36,6 +36,7 @@
 .markdown-body h3{font-size:19px;font-weight:650;line-height:1.6;margin:32px 0 16px}
 .markdown-body h4,.markdown-body h5,.markdown-body h6{font-size:16px;margin:26px 0 14px}
 .markdown-body strong{font-weight:650}
+.markdown-body code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88em;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:2px 5px;overflow-wrap:anywhere}
 .markdown-body a{color:var(--green);text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
 .markdown-body ul,.markdown-body ol{padding-left:24px;margin:0 0 24px}
 .markdown-body li{padding-left:3px;margin:7px 0}

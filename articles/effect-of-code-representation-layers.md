@@ -1,4 +1,4 @@
-# Effect of Code Representation Layers on LLM-Based Security Weakness Detection
+# [포스터발표] Effect of Code Representation Layers on LLM-Based Security Weakness Detection
 
 **논문 정보**
 
